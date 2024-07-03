@@ -62,10 +62,10 @@ while True:
         try:
             ip_address_object = ipaddress.ip_address(ip_address_entered)
             #This line will execute only, if the ip address is valid.
-            print("You entered valid ip address.")
+            print(colored("You entered valid ip address.", "green"))
             break
         except:
-             print("Ip address is no valid")
+             print(colored("You entered invalid ip address.", "red"))
 
 while True:
              #You can scan 0-65535 ports. This scanner is very basic and does not use multithreading so scannin all the port is not advised.
@@ -91,7 +91,10 @@ for port in range(port_min, port_max + 1):
                   #print(result)
                   #extracting the port status from returned object
             port_status = (result['scan'][ip_address_entered]['tcp'][port]['state'])
-            print(f"Port {port} is {port_status}")
+            if port_status == "open":
+                print(f"Port {port} is {colored(port_status, 'green')}")
+            else:
+                print(f"Port {port} is {port_status}")
         except:
             #If program cannot scan the port, print an error
             print(f"Cannot scan port {port}")
